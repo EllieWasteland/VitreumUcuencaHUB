@@ -16,5 +16,6 @@ Esta aplicación se encuentra en una fase de pruebas (Beta). Puedes encontrar er
 ```[OK] Despliegue inicial de Vitreum Hub v1.0.0.
 [INFO] Conexión con sistema de autenticación establecida.
 [INFO] Módulos de UI base cargados.
-[WARN] El sistema de personalización de fondo está en pruebas.'''
+[WARN] El sistema de personalización de fondo está en pruebas.
+```
 
