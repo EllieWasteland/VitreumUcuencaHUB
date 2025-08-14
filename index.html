@@ -27,8 +27,6 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scrollbar-gutter: stable; }
-        /* --- CORRECCIÓN --- */
-        /* Se quita la altura fija del body para permitir que el wrapper la controle */
         body { 
             font-family: var(--font-family-sans); 
             background: #000; 
@@ -36,14 +34,12 @@
         }
 
         /* --- FONDOS Y LAYOUTS PRINCIPALES --- */
-        /* --- CORRECCIÓN --- */
-        /* El wrapper ahora controla la altura usando una variable JS (--vh) y es el contenedor principal del overflow */
         #onboarding-screen, #login-screen, #setup-screen, #app-wrapper {
-            background: url('/img/wall2.gif') no-repeat center center/cover;
-            position: relative; /* Cambiado de absolute */
-            height: 100vh; /* Fallback para navegadores antiguos */
-            height: calc(var(--vh, 1vh) * 100); /* Altura dinámica real */
-            overflow: hidden; /* El overflow se maneja aquí */
+            background: url('/img/wall.gif') no-repeat center center/cover;
+            position: relative;
+            height: 100vh; 
+            height: calc(var(--vh, 1vh) * 100);
+            overflow: hidden;
             transition: opacity 0.6s ease-out, visibility 0.6s, background-image 0.8s ease;
             background-attachment: fixed;
         }
@@ -57,7 +53,7 @@
         #app-wrapper.active { opacity: 1; visibility: visible; }
 
         /* --- SPLASH SCREEN --- */
-        #splash-screen::before { content: ''; position: absolute; inset: -50px; filter: blur(20px); transition: filter 1s ease-out; background: url('/img/wall.gif') no-repeat center center/cover;}
+        #splash-screen::before { content: ''; position: absolute; inset: -50px; filter: blur(20px); transition: filter 1s ease-out; background: url('/img/wall2.gif') no-repeat center center/cover;}
         #splash-screen.focused::before { filter: blur(0px); }
         #splash-screen.exit { opacity: 0; }
         .splash-content { text-align: center; z-index: 1; }
@@ -110,7 +106,13 @@
         .modal-overlay.show .modal-content { transform: scale(1); }
         .modal-content h3 { margin-bottom: 15px; font-size: 1.5rem; }
         .modal-content p { color: var(--text-color-secondary); margin-bottom: 25px; line-height: 1.6; }
-        .modal-btn { border: none; padding: 12px 30px; border-radius: 50px; font-family: var(--font-family-sans); font-weight: 600; font-size: 1rem; cursor: pointer; width: 100%; background-color: var(--accent-color); color: #111; }
+        .modal-btn { border: none; padding: 12px 30px; border-radius: 50px; font-family: var(--font-family-sans); font-weight: 600; font-size: 1rem; cursor: pointer; transition: background-color 0.2s ease; }
+        .modal-btn.primary { background-color: var(--accent-color); color: #111; width: 100%; }
+        .modal-btn.secondary { background-color: rgba(255, 255, 255, 0.1); color: var(--text-color); width: 100%; }
+        .modal-btn.secondary:hover { background-color: rgba(255, 255, 255, 0.2); }
+        .modal-actions { display: flex; gap: 15px; margin-top: 25px; }
+        .modal-icon-wrapper { width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--accent-color); }
+        .modal-icon-wrapper i { width: 30px; height: 30px; }
 
         /* --- SETUP SCREEN --- */
         .setup-container { width: 480px; text-align: center; gap: 20px; }
@@ -139,7 +141,7 @@
         .main-container { 
             position: relative; 
             width: 100%; 
-            height: 100%; /* Ahora llena el #app-wrapper */
+            height: 100%;
             max-width: 1600px; 
             max-height: 900px; 
             margin: 0 auto; 
@@ -155,13 +157,13 @@
             border: 1px solid var(--border-color);
             border-radius: 30px;
             padding: 25px;
-            min-height: 100%; /* Asegura que el contenido llene el espacio en páginas cortas */
+            min-height: 100%;
         }
         .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 25px; }
 
         /* --- GRIDS Y WIDGETS --- */
         .dashboard-grid { display: grid; grid-template-columns: 320px 1fr 400px; grid-template-rows: auto 1fr; gap: 25px; }
-        .apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .profile-card { grid-column: 3 / 4; grid-row: 1 / 3; }
         .clock-widget { grid-column: 1 / 2; grid-row: 1 / 2; }
         .charging-stats { grid-column: 1 / 2; grid-row: 2 / 3; }
@@ -170,18 +172,38 @@
         .clock-widget { justify-content: center; align-items: center; text-align: center; }
         #clock-time { font-size: 5rem; font-weight: 700; line-height: 1; }
         #clock-date { font-size: 1.2rem; color: var(--text-color-secondary); }
-        .updates-widget pre { font-family: var(--font-family-mono); font-size: 0.9rem; line-height: 1.6; margin: auto 0; }
+        
+        .updates-widget pre {
+            font-family: var(--font-family-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-top: 15px;
+            overflow: auto;
+            flex-grow: 1;
+            min-height: 0;
+        }
+
         .updates-widget code .log-success { color: var(--log-success); }
         .updates-widget code .log-warn { color: var(--log-warn); }
         .updates-widget code .log-info { color: var(--log-info); }
-        .mindfulness-stats { align-items: center; text-align: center; justify-content: space-between; background: linear-gradient(270deg, rgba(83, 88, 133, 0.4), rgba(133, 83, 120, 0.4)); background-size: 400% 400%; animation: calm-gradient 15s ease infinite; }
-        @keyframes calm-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .start-session-btn { background: rgba(255, 255, 255, 0.1); border: none; color: var(--text-color); padding: 12px 25px; border-radius: 12px; font-weight: 500; cursor: pointer; transition: background-color 0.2s; }
-        .start-session-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        
+        .mindfulness-stats { 
+            align-items: center; 
+            text-align: center; 
+            justify-content: space-between; 
+        }
+        .stat-item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            border: 1px solid var(--border-color);
+            padding: 15px 10px; 
+            border-radius: 20px; 
+            flex-grow: 1; 
+        }
+
         .profile-card { justify-content: space-between; align-items: center; text-align: center; }
-        
         .profile-main { margin-top: 20px; display: flex; flex-direction: column; align-items: center; }
-        
         .profile-info-list { list-style: none; width: 100%; padding: 0 20px; margin: 20px 0; }
         .profile-info-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
         .profile-info-list li:last-child { border-bottom: none; }
@@ -192,7 +214,7 @@
         .app-preview-image img { width: 100%; height: 100%; object-fit: cover; }
         .app-info h3 { font-size: 1.2rem; }
         .app-info p { font-size: 0.9rem; color: var(--text-color-secondary); }
-        .app-open-button { background-color: var(--accent-color); color: #111; text-decoration: none; text-align: center; padding: 12px; border-radius: 12px; font-weight: 600; margin-top: auto; transition: transform 0.2s ease; }
+        .app-open-button { background-color: var(--accent-color); color: #111; text-decoration: none; text-align: center; padding: 12px; border-radius: 12px; font-weight: 600; margin-top: auto; transition: transform 0.2s ease; display: block; cursor: pointer; }
         .app-open-button:hover { transform: translateY(-2px); }
         .charging-stats .subtitle { color: var(--text-color-secondary); font-size: 0.9rem; margin-top: 5px; }
         .progress-circle { position: relative; width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; margin: auto; }
@@ -204,7 +226,6 @@
         .charge-toggle .icon-wrapper { background: var(--accent-color); color: #333; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
         .charge-toggle span { margin-right: 20px; font-weight: 500; }
         .stats-grid { display: flex; justify-content: space-around; width: 100%; gap: 10px; }
-        .stat-item { display: flex; flex-direction: column; align-items: center; background: rgba(0, 0, 0, 0.2); padding: 15px 10px; border-radius: 20px; flex-grow: 1; }
         .stat-item .label { font-size: 0.8rem; color: var(--text-color-secondary); }
         .stat-item .value { font-size: 1.2rem; font-weight: 600; margin-top: 5px; }
         .profile-picture { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; position: relative; }
@@ -215,6 +236,22 @@
         .profile-nav { display: flex; gap: 15px; background: rgba(0, 0, 0, 0.2); padding: 10px 20px; border-radius: 30px; }
         .nav-icon { background: transparent; border: none; color: var(--text-color-secondary); padding: 10px; border-radius: 50%; cursor: pointer; transition: color 0.2s, background-color 0.2s; display: flex; }
         .nav-icon:hover { color: var(--text-color); background-color: rgba(255,255,255,0.1); }
+
+        /* --- SECCIÓN DE SERVICIOS (NUEVOS ESTILOS) --- */
+        .services-category {
+            margin-bottom: 40px;
+        }
+        .services-category:last-child {
+            margin-bottom: 0;
+        }
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
 
         /* --- SECCIÓN DE AJUSTES --- */
         .settings-section { display: flex; flex-direction: column; gap: 25px; }
@@ -247,7 +284,7 @@
                 max-height: none;
             } 
             .page-content { 
-                padding: 20px 20px 120px 20px; /* Top, LR, Bottom (para nav bar) */
+                padding: 20px 20px 120px 20px;
             } 
             .dashboard-grid { display: flex; flex-direction: column; gap: 20px; }
             
@@ -268,7 +305,22 @@
         <div class="modal-content">
             <h3>Acceso Restringido</h3>
             <p id="login-error-modal-message">Debes usar una cuenta de correo institucional (@ucuenca.edu.ec) para poder acceder.</p>
-            <button id="login-error-modal-close" class="modal-btn">Entendido</button>
+            <button id="login-error-modal-close" class="modal-btn primary" style="width:100%;">Entendido</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE REDIRECCIÓN A ENOVA -->
+    <div id="enova-redirect-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon-wrapper">
+                <i data-lucide="external-link"></i>
+            </div>
+            <h3>Redirección Segura</h3>
+            <p>Estás a punto de ser dirigido al portal oficial de Enova (Moodle) para iniciar sesión. Vitreum Hub no gestiona tus credenciales.</p>
+            <div class="modal-actions">
+                <button id="enova-redirect-cancel" class="modal-btn secondary">Cancelar</button>
+                <button id="enova-redirect-confirm" class="modal-btn primary">Continuar</button>
+            </div>
         </div>
     </div>
 
@@ -276,7 +328,7 @@
     <div id="splash-screen">
         <div class="splash-content">
             <h1 class="splash-logo">VITREUM</h1>
-            <p class="loading-text">Inicializando módulos...</p>
+            <p class="loading-text"></p>
         </div>
         <div class="focus-wave"></div>
     </div>
@@ -370,22 +422,27 @@
                     <h1 class="page-title">Resumen</h1>
                     <div class="dashboard-grid">
                         <div class="widget clock-widget"><div id="clock-time">17:01</div><div id="clock-date">Tuesday, 24 Oct</div></div>
-                        <div class="widget charging-stats">
-                            <h3>System Status</h3><p class="subtitle">Battery & Performance</p>
-                            <div class="progress-circle" data-progress="85"><svg viewBox="0 0 100 100"><circle class="progress-bg" cx="50" cy="50" r="45"></circle><circle class="progress-bar" cx="50" cy="50" r="45"></circle></svg><span class="progress-text">85%</span></div>
-                            <div class="charge-toggle"><div class="icon-wrapper"><i data-lucide="zap"></i></div><span>Optimal</span></div>
-                        </div>
                         <div class="widget updates-widget">
                             <h3>Últimas Actualizaciones</h3>
-                            <pre><code>[<span class="log-success">OK</span>] Studi.App v2.1 deployed
-[<span class="log-info">INFO</span>] Orion tasks updated
-[<span class="log-warn">WARN</span>] API latency detected
-> Vitreum Hub v1.0.0 stable</code></pre>
+                            <pre><code id="updates-log">Cargando actualizaciones...</code></pre>
                         </div>
                         <div class="widget mindfulness-stats">
-                            <h3>Mindfulness</h3><p class="subtitle">Quantum Calm</p>
-                            <div class="stats-grid"><div class="stat-item"><span class="label">Breath</span><span class="value">14/min</span></div><div class="stat-item"><span class="label">Sleep</span><span class="value">8.1h</span></div><div class="stat-item"><span class="label">Flow</span><span class="value">86%</span></div></div>
-                            <button class="start-session-btn">Iniciar Sesión</button>
+                            <h3>Acceso Ucuenca</h3>
+                            <p class="subtitle">Inicio Ultra Rápido</p>
+                            <br>
+                            <div class="stats-grid">
+                                <div class="stat-item"><span class="label">E-learning</span><span class="value">Moodle</span></div>
+                            </div>
+                            <div id="enova-login-btn" class="app-open-button" style="width: 100%; margin-top: 15px;">
+                                Iniciar Sesión
+                            </div>
+                        </div>
+                        <div class="widget charging-stats">
+                            <h3>Estado del sistema</h3><p class="subtitle">Estado de los servicios Ucuenca</p>
+                            <br>
+                            <div class="progress-circle" data-progress="100"><svg viewBox="0 0 100 100"><circle class="progress-bg" cx="50" cy="50" r="45"></circle><circle class="progress-bar" cx="50" cy="50" r="45"></circle></svg><span class="progress-text">100%</span></div>
+                            <br>
+                            <div class="charge-toggle"><div class="icon-wrapper"><i data-lucide="zap"></i></div><span>Optimo 👌</span></div>
                         </div>
                         <div class="widget profile-card">
                             <div class="profile-main">
@@ -425,26 +482,88 @@
                     </div>
                 </div>
             </div>
+            <!-- SECCIÓN DE SERVICIOS - MODIFICADA -->
             <div id="services-content" class="page-content">
                 <div class="content-holder">
                     <h1 class="page-title">Servicios Universitarios</h1>
-                    <div class="apps-grid">
-                        <div class="widget app-card">
-                            <div class="app-preview-image"><img src="https://placehold.co/400x200/536DFE/fff?text=Correo" alt="Correo Institucional"></div>
-                            <div class="app-info"><h3>Correo Institucional</h3><p>Acceso directo a tu bandeja de entrada de Outlook.</p></div>
-                            <a href="#" target="_blank" class="app-open-button">Abrir Correo</a>
-                        </div>
-                        <div class="widget app-card">
-                            <div class="app-preview-image"><img src="https://placehold.co/400x200/E91E63/fff?text=SGA" alt="SGA"></div>
-                            <div class="app-info"><h3>SGA / Moodle</h3><p>Consulta tus notas, materias y recursos académicos.</p></div>
-                            <a href="#" target="_blank" class="app-open-button">Ir al SGA</a>
-                        </div>
-                         <div class="widget app-card">
-                            <div class="app-preview-image"><img src="https://placehold.co/400x200/009688/fff?text=Biblioteca" alt="Biblioteca"></div>
-                            <div class="app-info"><h3>Biblioteca Virtual</h3><p>Busca y accede a la base de datos de la biblioteca.</p></div>
-                            <a href="#" target="_blank" class="app-open-button">Buscar Libros</a>
+                    
+                    <!-- Categoría: Servicios Internos -->
+                    <div class="services-category">
+                        <h2 class="category-title">Servicios Internos</h2>
+                        <div class="apps-grid">
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="
+https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif" alt="Nova SGA"></div>
+                                <div class="app-info"><h3>Nova (SGA)</h3><p>Consulta tus notas, materias y recursos académicos.</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Ir a Nova</a>
+                            </div>
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s" alt="Enova Moodle"></div>
+                                <div class="app-info"><h3>eNOVA (Moodle)</h3><p>Plataforma de e-learning para tus cursos.</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Ir a eNOVA</a>
+                            </div>
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/21939811/newgmaillogo.jpg?quality=90&strip=all&crop=0,0,100,100" alt="Correo Institucional"></div>
+                                <div class="app-info"><h3>Correo Institucional</h3><p>Acceso directo a tu bandeja de entrada de Gmail.</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Abrir Correo</a>
+                            </div>
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXEk26yJKOSf2w4CziuP2VOdfeCdlBC5jesg&s" alt="Correo Institucional"></div>
+                                <div class="app-info"><h3>Portal de servicios</h3><p>Acceso a silabos e informacion general</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Abrir Portal</a>
+                            </div>
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://www.ucuenca.edu.ec/wp-content/uploads/2025/01/DSC07459.jpg" alt="Correo Institucional"></div>
+                                <div class="app-info"><h3>Biblioteca Digital</h3><p>Acceso directo biblioteca</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Abrir Pagina web</a>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Categoría: Documentos Generales -->
+                    <div class="services-category">
+                        <h2 class="category-title">Documentos Generales</h2>
+                        <div class="apps-grid">
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://placehold.co/400x200/009688/fff?text=Reglamento" alt="Reglamento Estudiantil"></div>
+                                <div class="app-info"><h3>Reglamento Estudiantil</h3><p>Consulta las normativas y derechos estudiantiles.</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Ver Documento</a>
+                            </div>
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://placehold.co/400x200/FF9800/fff?text=Calendario" alt="Calendario Académico"></div>
+                                <div class="app-info"><h3>Calendario Académico</h3><p>Fechas importantes, periodos de matrícula y exámenes.</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Ver Calendario</a>
+                            </div>
+                             <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://placehold.co/400x200/795548/fff?text=Biblioteca" alt="Biblioteca"></div>
+                                <div class="app-info"><h3>Biblioteca Virtual</h3><p>Busca y accede a la base de datos de la biblioteca.</p></div>
+                                <a href="#" target="_blank" class="app-open-button">Buscar Libros</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categoría: Redes Sociales -->
+                     <div class="services-category">
+                        <h2 class="category-title">Redes Sociales</h2>
+                        <div class="apps-grid">
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://placehold.co/400x200/3b5998/fff?text=Facebook" alt="Facebook"></div>
+                                <div class="app-info"><h3>Facebook</h3><p>Mantente al día con las noticias y eventos oficiales.</p></div>
+                                <a href="https://www.facebook.com/ucuenca" target="_blank" class="app-open-button">Seguir en Facebook</a>
+                            </div>
+                            <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://placehold.co/400x200/e4405f/fff?text=Instagram" alt="Instagram"></div>
+                                <div class="app-info"><h3>Instagram</h3><p>Descubre el día a día de la comunidad universitaria.</p></div>
+                                <a href="https://www.instagram.com/udecuenca/#" target="_blank" class="app-open-button">Seguir en Instagram</a>
+                            </div>
+                             <div class="widget app-card">
+                                <div class="app-preview-image"><img src="https://placehold.co/400x200/000000/fff?text=X" alt="X (Twitter)"></div>
+                                <div class="app-info"><h3>X (Twitter)</h3><p>Comunicados y actualizaciones importantes al instante.</p></div>
+                                <a href="https://twitter.com/udecuenca" target="_blank" class="app-open-button">Seguir en X</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div id="settings-content" class="page-content">
@@ -517,7 +636,6 @@
             const loginScreen = document.getElementById('login-screen');
             const setupScreen = document.getElementById('setup-screen');
             const appWrapper = document.getElementById('app-wrapper');
-            const loginErrorModal = document.getElementById('login-error-modal');
             let currentUserData = {};
 
             // --- MÓDULO DE INICIALIZACIÓN PRINCIPAL ---
@@ -528,19 +646,46 @@
                 setupNavigation();
                 setupActionButtons();
                 setupBackgroundChanger();
-                loadCustomBackground();
-                setupModal();
-                
-                // --- CORRECCIÓN ---
-                // Se llama a la función para establecer la altura real y se añade un listener para cuando cambie el tamaño
+                setupModals();
                 setRealViewportHeight();
                 window.addEventListener('resize', setRealViewportHeight);
-
+                fetchUpdates();
                 determineInitialFlow();
             }
 
-            // --- CORRECCIÓN ---
-            // Esta función calcula la altura visible real y la establece como una variable CSS
+            // --- MÓDULO DE ACTUALIZACIONES DESDE GITHUB ---
+            async function fetchUpdates() {
+                const logElement = document.getElementById('updates-log');
+                if (!logElement) return;
+                const url = 'https://raw.githubusercontent.com/EllieWasteland/VitreumUcuencaHUB/main/README.md';
+                try {
+                    const response = await fetch(url, { cache: 'no-cache' });
+                    if (!response.ok) throw new Error(`Error de red! Estatus: ${response.status}`);
+                    const markdown = await response.text();
+                    const heading = '## Últimas Actualizaciones';
+                    const startIndex = markdown.indexOf(heading);
+                    if (startIndex === -1) { logElement.textContent = 'Error: No se encontró el encabezado.'; return; }
+                    const codeBlockStartIndex = markdown.indexOf('```', startIndex);
+                    if (codeBlockStartIndex === -1) { logElement.textContent = 'Error: No se encontró el bloque de código.'; return; }
+                    const codeBlockEndIndex = markdown.indexOf('```', codeBlockStartIndex + 3);
+                    if (codeBlockEndIndex === -1) { logElement.textContent = 'Error: No se encontró el final del bloque de código.'; return; }
+                    const updatesContent = markdown.substring(codeBlockStartIndex + 3, codeBlockEndIndex).trim();
+                    if (updatesContent) {
+                        const escapedContent = updatesContent.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                        const formattedHtml = escapedContent
+                            .replace(/\[OK\]/g, '[<span class="log-success">OK</span>]')
+                            .replace(/\[INFO\]/g, '[<span class="log-info">INFO</span>]')
+                            .replace(/\[WARN\]/g, '[<span class="log-warn">WARN</span>]');
+                        logElement.innerHTML = formattedHtml;
+                    } else {
+                        logElement.textContent = 'La sección de actualizaciones está vacía.';
+                    }
+                } catch (error) {
+                    console.error('Error al cargar las actualizaciones:', error);
+                    logElement.textContent = '> Error de conexión al cargar actualizaciones.';
+                }
+            }
+
             function setRealViewportHeight() {
                 const vh = window.innerHeight * 0.01;
                 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -550,12 +695,10 @@
             function determineInitialFlow() {
                 setTimeout(() => splashScreen.classList.add('visible'), 500);
                 setTimeout(() => splashScreen.classList.add('focused'), 2000);
-
                 setTimeout(() => {
                     splashScreen.classList.add('exit');
                     setTimeout(() => {
                         splashScreen.style.display = 'none';
-                        
                         auth.onAuthStateChanged(user => {
                             const onboardingComplete = localStorage.getItem('vitreumHubOnboardingComplete');
                             if (onboardingComplete !== 'true') {
@@ -563,16 +706,14 @@
                                 setupOnboarding();
                                 return;
                             }
-
                             if (user) {
                                 if (!user.email.endsWith('@ucuenca.edu.ec')) {
                                     auth.signOut();
-                                    showLoginErrorModal();
+                                    document.getElementById('login-error-modal')?.classList.add('show');
                                     transitionTo(loginScreen);
                                     setupLogin();
                                     return;
                                 }
-
                                 const setupComplete = localStorage.getItem(`vitreumHubSetupComplete_${user.uid}`);
                                 if (setupComplete === 'true') {
                                     loadUserFromStorage(user);
@@ -592,27 +733,35 @@
                 }, 3000);
             }
 
-            // --- MANEJO DE TRANSICIONES Y MODAL ---
+            // --- MANEJO DE TRANSICIONES Y MODALES ---
             function transitionTo(activeScreen) {
                 [onboardingScreen, loginScreen, setupScreen, appWrapper].forEach(screen => {
                     screen.classList.remove('active');
                 });
-                if (activeScreen) {
-                    activeScreen.classList.add('active');
-                }
+                if (activeScreen) activeScreen.classList.add('active');
             }
             
-            function showLoginErrorModal() {
-                if (loginErrorModal) loginErrorModal.classList.add('show');
-            }
+            function setupModals() {
+                const loginErrorModal = document.getElementById('login-error-modal');
+                const closeLoginErrorBtn = document.getElementById('login-error-modal-close');
+                const enovaRedirectModal = document.getElementById('enova-redirect-modal');
+                const enovaRedirectConfirm = document.getElementById('enova-redirect-confirm');
+                const enovaRedirectCancel = document.getElementById('enova-redirect-cancel');
+                const enovaLoginBtn = document.getElementById('enova-login-btn');
 
-            function setupModal() {
-                const closeBtn = document.getElementById('login-error-modal-close');
-                if(closeBtn) {
-                    closeBtn.addEventListener('click', () => {
-                        loginErrorModal.classList.remove('show');
-                    });
-                }
+                closeLoginErrorBtn?.addEventListener('click', () => loginErrorModal?.classList.remove('show'));
+                
+                enovaLoginBtn?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    enovaRedirectModal?.classList.add('show');
+                });
+
+                enovaRedirectConfirm?.addEventListener('click', () => {
+                    window.open('https://enova-grado.ucuenca.edu.ec/login/index.php', '_blank');
+                    enovaRedirectModal?.classList.remove('show');
+                });
+
+                enovaRedirectCancel?.addEventListener('click', () => enovaRedirectModal?.classList.remove('show'));
             }
 
             // --- MANEJO DEL ONBOARDING ---
@@ -620,20 +769,21 @@
                 const nextBtn = document.getElementById('next-btn');
                 const acceptBtn = document.getElementById('accept-btn');
                 const denyBtn = document.getElementById('deny-btn');
-
                 nextBtn.addEventListener('click', () => {
                     document.getElementById('welcome-card').classList.remove('active');
                     document.getElementById('agreement-card').classList.add('active');
                 });
-                
                 acceptBtn.addEventListener('click', () => {
                     localStorage.setItem('vitreumHubOnboardingComplete', 'true');
                     transitionTo(loginScreen);
                     setupLogin();
                 });
-
                 denyBtn.addEventListener('click', () => {
-                    alert("Debes aceptar los términos para poder usar la aplicación.");
+                    // Replace alert with a custom modal in the future
+                    const modal = document.createElement('div');
+                    modal.innerHTML = `<div class="modal-overlay show"><div class="modal-content"><h3>Acuerdo Requerido</h3><p>Debes aceptar los términos para poder usar la aplicación.</p><button class="modal-btn primary">Entendido</button></div></div>`;
+                    document.body.appendChild(modal);
+                    modal.querySelector('button').onclick = () => modal.remove();
                 });
             }
 
@@ -642,11 +792,10 @@
                 const googleLoginBtn = document.getElementById('google-login-btn');
                 const newBtn = googleLoginBtn.cloneNode(true);
                 googleLoginBtn.parentNode.replaceChild(newBtn, googleLoginBtn);
-
                 newBtn.addEventListener('click', () => {
                     auth.signInWithPopup(provider).catch(error => {
                         console.error("Error de login:", error);
-                        showLoginErrorModal();
+                        document.getElementById('login-error-modal')?.classList.add('show');
                     });
                 });
             }
@@ -675,13 +824,11 @@
                     if (user) {
                         currentUserData.displayName = setupDisplayName.value;
                         currentUserData.photoURL = setupProfilePic.src;
-                        
                         localStorage.setItem(`vitreumHubSetupComplete_${user.uid}`, 'true');
                         localStorage.setItem(`vitreumHubDisplayName_${user.uid}`, currentUserData.displayName);
                         if (currentUserData.photoURL.startsWith('data:image')) {
                             localStorage.setItem(`vitreumHubPhotoURL_${user.uid}`, currentUserData.photoURL);
                         }
-
                         updateUIForUser(currentUserData);
                         transitionTo(appWrapper);
                     }
@@ -707,8 +854,7 @@
 
             // --- ACCIONES (NAVEGACIÓN Y LOGOUT) ---
             function setupNavigation() {
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
+                document.querySelectorAll('.nav-link').forEach(link => {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
                         const targetId = link.getAttribute('data-target');
@@ -718,7 +864,7 @@
                         const targetPage = document.getElementById(targetId);
                         if(targetPage) {
                             targetPage.classList.add('active');
-                            targetPage.scrollTo(0, 0); // Scroll al inicio de la página al cambiar
+                            targetPage.scrollTo(0, 0);
                         }
                     });
                 });
@@ -736,33 +882,29 @@
                 document.querySelector('.logout-btn-mobile')?.addEventListener('click', handleLogout);
             }
 
-            // --- NUEVAS FUNCIONES DE UI ---
+            // --- FUNCIONES DE UI ADICIONALES ---
             function loadCustomBackground() {
                 const customBg = localStorage.getItem('vitreumHubCustomBackground');
-                if (customBg) {
-                    appWrapper.style.backgroundImage = `url('${customBg}')`;
-                }
+                if (customBg) appWrapper.style.backgroundImage = `url('${customBg}')`;
             }
 
             function setupBackgroundChanger() {
                 const bgFileInput = document.getElementById('background-file-input');
-                if (bgFileInput) {
-                    bgFileInput.addEventListener('change', (e) => {
-                        const file = e.target.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = (event) => {
-                                const newBgDataUrl = event.target.result;
-                                appWrapper.style.backgroundImage = `url('${newBgDataUrl}')`;
-                                localStorage.setItem('vitreumHubCustomBackground', newBgDataUrl);
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                }
+                bgFileInput?.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            const newBgDataUrl = event.target.result;
+                            appWrapper.style.backgroundImage = `url('${newBgDataUrl}')`;
+                            localStorage.setItem('vitreumHubCustomBackground', newBgDataUrl);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
             }
 
-            // --- MÓDULOS DE UI ---
+            // --- MÓDULOS DE UI (RELOJ, BARRAS DE PROGRESO) ---
             function startClock() {
                 const timeEl = document.getElementById('clock-time');
                 const dateEl = document.getElementById('clock-date');
@@ -788,6 +930,7 @@
                 });
             }
 
+            // --- INICIAR LA APLICACIÓN ---
             initializeApp();
         });
     </script>
