@@ -26,32 +26,31 @@
             --error-color: #f87171;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scrollbar-gutter: stable; }
         /* --- CORRECCIÓN --- */
-        /* Se establece la altura del html y body al 100% para evitar problemas con vh en móviles */
-        html { 
-            scrollbar-gutter: stable; 
-            height: 100%;
-        }
+        /* Se quita la altura fija del body para permitir que el wrapper la controle */
         body { 
             font-family: var(--font-family-sans); 
             background: #000; 
             color: var(--text-color); 
-            height: 100%; /* Se cambia min-height: 100vh por height: 100% */
-            overflow: hidden; 
         }
 
         /* --- FONDOS Y LAYOUTS PRINCIPALES --- */
+        /* --- CORRECCIÓN --- */
+        /* El wrapper ahora controla la altura usando una variable JS (--vh) y es el contenedor principal del overflow */
         #onboarding-screen, #login-screen, #setup-screen, #app-wrapper {
             background: url('/img/wall2.gif') no-repeat center center/cover;
-            position: absolute;
-            inset: 0;
+            position: relative; /* Cambiado de absolute */
+            height: 100vh; /* Fallback para navegadores antiguos */
+            height: calc(var(--vh, 1vh) * 100); /* Altura dinámica real */
+            overflow: hidden; /* El overflow se maneja aquí */
             transition: opacity 0.6s ease-out, visibility 0.6s, background-image 0.8s ease;
             background-attachment: fixed;
         }
 
         #splash-screen { position: fixed; inset: 0; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease-out; overflow: hidden; background: #000; }
 
-        #onboarding-screen, #login-screen, #setup-screen { display: none; justify-content: center; align-items: center; opacity: 0; }
+        #onboarding-screen, #login-screen, #setup-screen { display: none; justify-content: center; align-items: center; opacity: 0; position: absolute; inset: 0;}
         #onboarding-screen.active, #login-screen.active, #setup-screen.active { display: flex; opacity: 1; }
 
         #app-wrapper { opacity: 0; visibility: hidden; }
@@ -137,12 +136,10 @@
         .top-nav .nav-link i { width: 18px; }
         .top-nav .nav-link.active { color: #111; background: var(--text-color); font-weight: 600; }
         
-        /* --- CORRECCIÓN --- */
-        /* Se cambia height: 100vh por height: 100% para que el contenedor ocupe el 100% de su padre (app-wrapper) */
         .main-container { 
             position: relative; 
             width: 100%; 
-            height: 100%; 
+            height: 100%; /* Ahora llena el #app-wrapper */
             max-width: 1600px; 
             max-height: 900px; 
             margin: 0 auto; 
@@ -158,6 +155,7 @@
             border: 1px solid var(--border-color);
             border-radius: 30px;
             padding: 25px;
+            min-height: 100%; /* Asegura que el contenido llene el espacio en páginas cortas */
         }
         .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 25px; }
 
@@ -249,11 +247,7 @@
                 max-height: none;
             } 
             .page-content { 
-                position: absolute;
-                inset: 0;
-                height: 100%;
                 padding: 20px 20px 120px 20px; /* Top, LR, Bottom (para nav bar) */
-                overflow-y: auto;
             } 
             .dashboard-grid { display: flex; flex-direction: column; gap: 20px; }
             
@@ -536,7 +530,20 @@
                 setupBackgroundChanger();
                 loadCustomBackground();
                 setupModal();
+                
+                // --- CORRECCIÓN ---
+                // Se llama a la función para establecer la altura real y se añade un listener para cuando cambie el tamaño
+                setRealViewportHeight();
+                window.addEventListener('resize', setRealViewportHeight);
+
                 determineInitialFlow();
+            }
+
+            // --- CORRECCIÓN ---
+            // Esta función calcula la altura visible real y la establece como una variable CSS
+            function setRealViewportHeight() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
             }
 
             // --- LÓGICA DE FLUJO INICIAL ---
