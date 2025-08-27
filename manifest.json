@@ -1,0 +1,23 @@
+{
+  "name": "Vitreum Hub",
+  "short_name": "Vitreum",
+  "description": "Unifica el acceso a los servicios digitales de la Universidad de Cuenca.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1e1e28",
+  "theme_color": "#1e1e28",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./img/icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./img/icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
