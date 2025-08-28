@@ -326,11 +326,24 @@ body {
 .control-btn.close { background-color: #ff5f56; }
 .control-btn.minimize { background-color: #ffbd2e; }
 .control-btn.maximize { background-color: #27c93f; }
+
+/* --- MEJORA: TÍTULO CENTRADO --- */
 .window-title-text {
     font-weight: 600;
     color: var(--text-color);
-    margin-left: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px 90px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    margin-left: 0; /* Anular el margen original */
+    transition: all 0.3s ease;
+    pointer-events: none; /* Evita que el título intercepte clics */
 }
+
 
 /* NEW: Desktop Menu Styles */
 .header-actions {
