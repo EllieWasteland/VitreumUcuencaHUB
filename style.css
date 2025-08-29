@@ -306,13 +306,14 @@ body {
 }
 
 .window-header {
-    padding: 10px 20px;
+    padding: 0 20px; /* Se ajusta el padding */
     background: rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     flex-shrink: 0;
     position: relative; /* For menu positioning */
+    min-height: 50px; /* Se establece una altura mínima para todas las vistas */
 }
 .window-controls {
     display: flex;
@@ -336,7 +337,7 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.2);
-    padding: 12px 90px;
+    padding: 6px 24px;
     border-radius: 12px;
     border: 1px solid var(--border-color);
     margin-left: 0; /* Anular el margen original */
@@ -622,6 +623,20 @@ body {
     .window-controls {
         position: absolute;
         left: 20px;
+        /* Centramos los controles verticalmente en la barra más alta */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    /* --- CORRECCIÓN PARA EL TÍTULO EN MÓVIL --- */
+    .window-title-text {
+        /* Ajustamos el padding como se solicitó */
+        padding: 6px 15px;
+        font-size: 0.9rem;
+        max-width: calc(100% - 140px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
