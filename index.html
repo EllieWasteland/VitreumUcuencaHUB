@@ -49,17 +49,53 @@
         </div>
     </div>
 
+    <!-- SCHEDULE ASSISTANT SCREEN -->
+    <div id="schedule-assistant-screen" class="modal-overlay">
+        <div class="schedule-assistant-window widget">
+            <div class="assistant-header">
+                <h3>Asistente de Horario</h3>
+                <button id="close-assistant-btn" class="close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <p>Configura tu horario de clases de Lunes a Viernes.</p>
+            <div class="schedule-days-nav">
+                <button class="day-tab active" data-day="lunes">L</button>
+                <button class="day-tab" data-day="martes">M</button>
+                <button class="day-tab" data-day="miercoles">X</button>
+                <button class="day-tab" data-day="jueves">J</button>
+                <button class="day-tab" data-day="viernes">V</button>
+            </div>
+            <div class="schedule-day-content">
+                <h4 id="assistant-day-title">Lunes</h4>
+                <form id="add-subject-form">
+                    <input type="text" id="subject-name" placeholder="Nombre de la materia" required>
+                    <input type="text" id="subject-teacher" placeholder="Nombre del docente (opcional)">
+                    <div class="time-inputs">
+                        <label for="subject-start-time">Inicio:</label>
+                        <input type="time" id="subject-start-time" required>
+                        <label for="subject-end-time">Fin:</label>
+                        <input type="time" id="subject-end-time" required>
+                    </div>
+                    <button type="submit" class="add-btn"><i data-lucide="plus"></i> Añadir Materia</button>
+                </form>
+                <div id="current-day-subjects-list">
+                    <!-- Materias añadidas para el día actual -->
+                </div>
+            </div>
+            <div class="assistant-actions">
+                <button id="save-schedule-btn" class="onboarding-btn primary">Guardar y Salir</button>
+            </div>
+        </div>
+    </div>
+
+
     <!-- SPLASH SCREEN -->
     <div id="splash-screen">
-        <!-- Contenedor para los videos -->
         <div class="splash-video-container">
             <video id="splash-video-1" class="splash-video" preload="auto" muted playsinline>
                 <source src="./img/video1.mp4" type="video/mp4">
-                Tu navegador no soporta el tag de video.
             </video>
             <video id="splash-video-2" class="splash-video" preload="auto" muted playsinline>
                 <source src="./img/video2.mp4" type="video/mp4">
-                Tu navegador no soporta el tag de video.
             </video>
         </div>
         <div class="focus-wave"></div>
@@ -78,7 +114,6 @@
                 <div id="onboarding-title" class="window-title-text">Bienvenida</div>
             </div>
             <div class="onboarding-content-area">
-                <!-- Welcome Card -->
                 <div id="welcome-card" class="onboarding-card active">
                     <h3>Bienvenido a Vitreum Hub</h3>
                     <div class="onboarding-card-body">
@@ -88,12 +123,9 @@
                                 <button id="next-btn" class="onboarding-btn primary">Siguiente</button>
                             </div>
                         </div>
-                        <div class="onboarding-image-container" style="background-image: url('/img/inicio2.gif');">
-                             <!-- La imagen ahora es un fondo de este div, no se necesita la etiqueta img -->
-                        </div>
+                        <div class="onboarding-image-container" style="background-image: url('/img/inicio2.gif');"></div>
                     </div>
                 </div>
-                <!-- Agreement Card -->
                 <div id="agreement-card" class="onboarding-card">
                     <h3>Acuerdo de Usuario</h3>
                     <div class="onboarding-card-body">
@@ -106,9 +138,7 @@
                                 <button id="accept-btn" class="onboarding-btn primary">Aceptar y Continuar</button>
                             </div>
                         </div>
-                        <div class="onboarding-image-container" style="background-image: url('/img/terminos.gif');">
-                             <!-- La imagen ahora es un fondo de este div, no se necesita la etiqueta img -->
-                        </div>
+                        <div class="onboarding-image-container" style="background-image: url('/img/terminos.gif');"></div>
                     </div>
                 </div>
             </div>
@@ -153,37 +183,74 @@
     <!-- SETUP SCREEN -->
     <div id="setup-screen">
         <div class="setup-container widget">
-            <h3>Configuración Inicial</h3>
-            <p>Personaliza tu perfil antes de continuar.</p>
-            
-            <div class="profile-editor">
-                <label for="profile-pic-input" class="profile-pic-label">
-                    <img id="setup-profile-pic" src="https://placehold.co/120x120/1e1e28/f0f0f0?text=?" alt="Foto de perfil">
-                    <div class="pic-overlay"><i data-lucide="camera"></i></div>
-                </label>
-                <input type="file" id="profile-pic-input" accept="image/*">
-                <input type="text" id="setup-display-name" class="setup-input" placeholder="Tu nombre para mostrar">
+            <div class="setup-progress">
+                <div class="progress-step active" data-step="1"><div class="step-icon"><i data-lucide="image"></i></div><div class="step-label">Foto</div></div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2"><div class="step-icon"><i data-lucide="user"></i></div><div class="step-label">Nombre</div></div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3"><div class="step-icon"><i data-lucide="graduation-cap"></i></div><div class="step-label">Carrera</div></div>
+                 <div class="progress-line"></div>
+                <div class="progress-step" data-step="4"><div class="step-icon"><i data-lucide="calendar-days"></i></div><div class="step-label">Horario</div></div>
             </div>
 
-            <div class="early-access-card">
-                <div class="icon-wrapper"><i data-lucide="shield-alert"></i></div>
-                <div class="text-wrapper">
-                    <h4>Acceso Anticipado</h4>
-                    <p>Esta versión es gratuita. Futuras versiones podrían tener funciones premium.</p>
+            <div class="setup-steps-container">
+                <div class="setup-step active" id="setup-step-1">
+                    <h3>Elige tu Foto de Perfil</h3><p>Puedes cambiarla cuando quieras.</p>
+                    <label for="profile-pic-input" class="profile-pic-label">
+                        <img id="setup-profile-pic" src="https://placehold.co/120x120/1e1e28/f0f0f0?text=?" alt="Foto de perfil">
+                        <div class="pic-overlay"><i data-lucide="camera"></i></div>
+                    </label>
+                    <input type="file" id="profile-pic-input" accept="image/*">
+                    <div class="step-navigation"><button class="onboarding-btn primary" data-action="next">Siguiente</button></div>
+                </div>
+
+                <div class="setup-step" id="setup-step-2">
+                    <h3>¿Cómo te llamas?</h3><p>Esta información se mostrará en tu perfil.</p>
+                    <input type="text" id="setup-first-name" class="setup-input" placeholder="Nombres" required>
+                    <input type="text" id="setup-last-name" class="setup-input" placeholder="Apellidos" required>
+                    <input type="text" id="setup-nickname" class="setup-input" placeholder="Apodo (opcional)">
+                    <div class="step-navigation">
+                        <button class="onboarding-btn secondary" data-action="back">Atrás</button>
+                        <button class="onboarding-btn primary" data-action="next">Siguiente</button>
+                    </div>
+                </div>
+
+                <div class="setup-step" id="setup-step-3">
+                    <h3>¿Qué carrera estudias?</h3><p>Esto nos ayudará a personalizar tu experiencia.</p>
+                    <select id="setup-major" class="setup-input">
+                        <option value="" disabled selected>Selecciona tu carrera</option>
+                        <option value="periodismo">Periodismo</option>
+                        <option value="educacion-basica">Educación Básica</option>
+                        <option value="educacion-inicial">Educación Inicial</option>
+                        <option value="filosofia">Filosofía</option>
+                    </select>
+                    <div class="step-navigation">
+                        <button class="onboarding-btn secondary" data-action="back">Atrás</button>
+                        <button class="onboarding-btn primary" data-action="next">Siguiente</button>
+                    </div>
+                </div>
+
+                <div class="setup-step" id="setup-step-4">
+                    <h3>Tu Horario de Clases</h3>
+                    <p>Puedes crearlo ahora o hacerlo más tarde desde los ajustes.</p>
+                     <div class="onboarding-image-container" style="background-image: url('/img/horario.gif'); margin: 20px auto;"></div>
+                    <div class="step-navigation">
+                        <button class="onboarding-btn secondary" data-action="skip">Omitir por ahora</button>
+                        <button class="onboarding-btn primary" data-action="finish">Crear Horario</button>
+                    </div>
                 </div>
             </div>
-
-            <button id="finish-setup-btn" class="onboarding-btn primary">Finalizar y Entrar</button>
         </div>
     </div>
 
+
     <!-- APP WRAPPER -->
     <div id="app-wrapper">
-        <!-- Mobile Nav (previously top-nav) -->
         <nav class="mobile-nav">
             <div class="nav-glass-container">
                 <ul>
                     <li><a href="#" class="nav-link active" data-target="summary-content"><i data-lucide="layout-grid"></i><span>Resumen</span></a></li>
+                    <li><a href="#" class="nav-link" data-target="schedule-content"><i data-lucide="calendar-clock"></i><span>Horario</span></a></li>
                     <li><a href="#" class="nav-link" data-target="services-content"><i data-lucide="briefcase"></i><span>Servicios</span></a></li>
                     <li><a href="#" class="nav-link" data-target="apps-content"><i data-lucide="app-window"></i><span>Apps</span></a></li>
                     <li><a href="#" class="nav-link" data-target="settings-content"><i data-lucide="settings"></i><span>Ajustes</span></a></li>
@@ -192,7 +259,6 @@
         </nav>
         
         <main class="main-container">
-            <!-- Window Header with integrated Desktop Nav -->
             <div class="window-header">
                 <div class="window-controls">
                     <span class="control-btn close"></span>
@@ -201,12 +267,11 @@
                 </div>
                 <div id="window-title" class="window-title-text">Resumen</div>
                 <div class="header-actions">
-                    <button id="menu-btn" class="menu-btn">
-                        <i data-lucide="menu"></i>
-                    </button>
+                    <button id="menu-btn" class="menu-btn"><i data-lucide="menu"></i></button>
                     <nav id="desktop-nav-container" class="desktop-nav-container">
                          <ul>
                             <li><a href="#" class="nav-link active" data-target="summary-content"><span>Resumen</span></a></li>
+                            <li><a href="#" class="nav-link" data-target="schedule-content"><span>Horario</span></a></li>
                             <li><a href="#" class="nav-link" data-target="services-content"><span>Servicios</span></a></li>
                             <li><a href="#" class="nav-link" data-target="apps-content"><span>Apps</span></a></li>
                             <li><a href="#" class="nav-link" data-target="settings-content"><span>Ajustes</span></a></li>
@@ -223,29 +288,22 @@
                             <h3>Últimas Actualizaciones</h3>
                             <pre><code id="updates-log">Cargando actualizaciones...</code></pre>
                         </div>
-                        <div class="widget mindfulness-stats">
-                            <h3>Acceso Ucuenca</h3>
-                            <p class="subtitle">Inicio Ultra Rápido</p>
-                            <br>
-                            <div class="stats-grid">
-                                <div class="stat-item"><span class="label">E-learning</span><span class="value">Moodle</span></div>
-                            </div>
-                            <div id="enova-login-btn" class="app-open-button" style="width: 100%; margin-top: 15px;">
-                                Iniciar Sesión
-                            </div>
+                        <div id="next-class-widget" class="widget next-class-widget">
+                            <!-- Contenido generado por script.js -->
                         </div>
-                        <div class="widget charging-stats">
-                            <h3>Estado del sistema</h3><p class="subtitle">Estado de los servicios Ucuenca</p>
-                            <br>
-                            <div class="progress-circle" data-progress="100"><svg viewBox="0 0 100 100"><circle class="progress-bg" cx="50" cy="50" r="45"></circle><circle class="progress-bar" cx="50" cy="50" r="45"></circle></svg><span class="progress-text">100%</span></div>
-                            <br>
-                            <div class="charge-toggle"><div class="icon-wrapper"><i data-lucide="zap"></i></div><span>Optimo 👌</span></div>
+                        <div class="widget enova-slider-widget">
+                            <h3>Acceso Rápido</h3>
+                            <p class="subtitle">Plataforma eNova (Moodle)</p>
+                            <div id="enova-slider-container" class="slider-container">
+                                <div id="enova-slider-handle" class="slider-handle">
+                                    <i data-lucide="chevron-right"></i><i data-lucide="chevron-right" style="margin-left: -12px;"></i>
+                                </div>
+                                <div class="slider-track-text">Deslizar para ir</div>
+                            </div>
                         </div>
                         <div class="widget profile-card">
                             <div class="profile-main">
-                                <div class="profile-picture">
-                                    <img class="user-profile-pic" src="https://placehold.co/120x120/ffffff/1e1e28?text=U" alt="User's profile picture">
-                                </div>
+                                <div class="profile-picture"><img class="user-profile-pic" src="https://placehold.co/120x120/ffffff/1e1e28?text=U" alt="User's profile picture"></div>
                                 <h2 class="user-display-name">Usuario</h2>
                             </div>
                             <ul class="profile-info-list">
@@ -261,6 +319,11 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="schedule-content" class="page-content">
+                    <!-- El contenido del horario se renderizará aquí vía JS -->
+                </div>
+                
                 <div id="apps-content" class="page-content">
                     <h1 class="page-title">Ecosistema Vitreum</h1>
                     <div class="apps-grid">
@@ -276,95 +339,29 @@
                         </div>
                     </div>
                 </div>
-                <!-- SECCIÓN DE SERVICIOS - MODIFICADA -->
+
                 <div id="services-content" class="page-content">
                     <h1 class="page-title">Servicios Universitarios</h1>
-                    
-                    <!-- Categoría: Servicios Internos -->
                     <div class="services-category">
                         <h2 class="category-title">Servicios Internos</h2>
                         <div class="apps-grid">
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="
-    https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif" alt="Nova SGA"></div>
-                                <div class="app-info"><h3>Nova (SGA)</h3><p>Consulta tus notas, materias y recursos académicos.</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Ir a Nova</a>
-                            </div>
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s" alt="Enova Moodle"></div>
-                                <div class="app-info"><h3>eNOVA (Moodle)</h3><p>Plataforma de e-learning para tus cursos.</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Ir a eNOVA</a>
-                            </div>
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/21939811/newgmaillogo.jpg?quality=90&strip=all&crop=0,0,100,100" alt="Correo Institucional"></div>
-                                <div class="app-info"><h3>Correo Institucional</h3><p>Acceso directo a tu bandeja de entrada de Gmail.</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Abrir Correo</a>
-                            </div>
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXEk26yJKOSf2w4CziuP2VOdfeCdlBC5jesg&s" alt="Correo Institucional"></div>
-                                <div class="app-info"><h3>Portal de servicios</h3><p>Acceso a silabos e informacion general</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Abrir Portal</a>
-                            </div>
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://www.ucuenca.edu.ec/wp-content/uploads/2025/01/DSC07459.jpg" alt="Correo Institucional"></div>
-                                <div class="app-info"><h3>Biblioteca Digital</h3><p>Acceso directo biblioteca</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Abrir Pagina web</a>
-                            </div>
+                            <div class="widget app-card"><div class="app-preview-image"><img src="https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif" alt="Nova SGA"></div><div class="app-info"><h3>Nova (SGA)</h3><p>Consulta tus notas, materias y recursos académicos.</p></div><a href="#" target="_blank" class="app-open-button">Ir a Nova</a></div>
+                            <div class="widget app-card"><div class="app-preview-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s" alt="Enova Moodle"></div><div class="app-info"><h3>eNOVA (Moodle)</h3><p>Plataforma de e-learning para tus cursos.</p></div><a href="#" target="_blank" class="app-open-button">Ir a eNOVA</a></div>
+                            <div class="widget app-card"><div class="app-preview-image"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/21939811/newgmaillogo.jpg?quality=90&strip=all&crop=0,0,100,100" alt="Correo Institucional"></div><div class="app-info"><h3>Correo Institucional</h3><p>Acceso directo a tu bandeja de entrada de Gmail.</p></div><a href="#" target="_blank" class="app-open-button">Abrir Correo</a></div>
+                            <div class="widget app-card"><div class="app-preview-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXEk26yJKOSf2w4CziuP2VOdfeCdlBC5jesg&s" alt="Portal de servicios"></div><div class="app-info"><h3>Portal de servicios</h3><p>Acceso a silabos e informacion general</p></div><a href="#" target="_blank" class="app-open-button">Abrir Portal</a></div>
+                            <div class="widget app-card"><div class="app-preview-image"><img src="https://www.ucuenca.edu.ec/wp-content/uploads/2025/01/DSC07459.jpg" alt="Biblioteca Digital"></div><div class="app-info"><h3>Biblioteca Digital</h3><p>Acceso directo biblioteca</p></div><a href="#" target="_blank" class="app-open-button">Abrir Pagina web</a></div>
                         </div>
                     </div>
-
-                    <!-- Categoría: Documentos Generales -->
-                    <div class="services-category">
-                        <h2 class="category-title">Documentos Generales</h2>
-                        <div class="apps-grid">
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://placehold.co/400x200/009688/fff?text=Reglamento" alt="Reglamento Estudiantil"></div>
-                                <div class="app-info"><h3>Reglamento Estudiantil</h3><p>Consulta las normativas y derechos estudiantiles.</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Ver Documento</a>
-                            </div>
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://placehold.co/400x200/FF9800/fff?text=Calendario" alt="Calendario Académico"></div>
-                                <div class="app-info"><h3>Calendario Académico</h3><p>Fechas importantes, periodos de matrícula y exámenes.</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Ver Calendario</a>
-                            </div>
-                             <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://placehold.co/400x200/795548/fff?text=Biblioteca" alt="Biblioteca"></div>
-                                <div class="app-info"><h3>Biblioteca Virtual</h3><p>Busca y accede a la base de datos de la biblioteca.</p></div>
-                                <a href="#" target="_blank" class="app-open-button">Buscar Libros</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Categoría: Redes Sociales -->
-                     <div class="services-category">
-                        <h2 class="category-title">Redes Sociales</h2>
-                        <div class="apps-grid">
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://placehold.co/400x200/3b5998/fff?text=Facebook" alt="Facebook"></div>
-                                <div class="app-info"><h3>Facebook</h3><p>Mantente al día con las noticias y eventos oficiales.</p></div>
-                                <a href="https://www.facebook.com/ucuenca" target="_blank" class="app-open-button">Seguir en Facebook</a>
-                            </div>
-                            <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://placehold.co/400x200/e4405f/fff?text=Instagram" alt="Instagram"></div>
-                                <div class="app-info"><h3>Instagram</h3><p>Descubre el día a día de la comunidad universitaria.</p></div>
-                                <a href="https://www.instagram.com/udecuenca/#" target="_blank" class="app-open-button">Seguir en Instagram</a>
-                            </div>
-                             <div class="widget app-card">
-                                <div class="app-preview-image"><img src="https://placehold.co/400x200/000000/fff?text=X" alt="X (Twitter)"></div>
-                                <div class="app-info"><h3>X (Twitter)</h3><p>Comunicados y actualizaciones importantes al instante.</p></div>
-                                <a href="https://twitter.com/udecuenca" target="_blank" class="app-open-button">Seguir en X</a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="services-category"><h2 class="category-title">Documentos Generales</h2><div class="apps-grid"><div class="widget app-card"><div class="app-preview-image"><img src="https://placehold.co/400x200/009688/fff?text=Reglamento" alt="Reglamento Estudiantil"></div><div class="app-info"><h3>Reglamento Estudiantil</h3><p>Consulta las normativas y derechos estudiantiles.</p></div><a href="#" target="_blank" class="app-open-button">Ver Documento</a></div><div class="widget app-card"><div class="app-preview-image"><img src="https://placehold.co/400x200/FF9800/fff?text=Calendario" alt="Calendario Académico"></div><div class="app-info"><h3>Calendario Académico</h3><p>Fechas importantes, periodos de matrícula y exámenes.</p></div><a href="#" target="_blank" class="app-open-button">Ver Calendario</a></div><div class="widget app-card"><div class="app-preview-image"><img src="https://placehold.co/400x200/795548/fff?text=Biblioteca" alt="Biblioteca"></div><div class="app-info"><h3>Biblioteca Virtual</h3><p>Busca y accede a la base de datos de la biblioteca.</p></div><a href="#" target="_blank" class="app-open-button">Buscar Libros</a></div></div></div>
+                    <div class="services-category"><h2 class="category-title">Redes Sociales</h2><div class="apps-grid"><div class="widget app-card"><div class="app-preview-image"><img src="https://placehold.co/400x200/3b5998/fff?text=Facebook" alt="Facebook"></div><div class="app-info"><h3>Facebook</h3><p>Mantente al día con las noticias y eventos oficiales.</p></div><a href="https://www.facebook.com/ucuenca" target="_blank" class="app-open-button">Seguir en Facebook</a></div><div class="widget app-card"><div class="app-preview-image"><img src="https://placehold.co/400x200/e4405f/fff?text=Instagram" alt="Instagram"></div><div class="app-info"><h3>Instagram</h3><p>Descubre el día a día de la comunidad universitaria.</p></div><a href="https://www.instagram.com/udecuenca/#" target="_blank" class="app-open-button">Seguir en Instagram</a></div><div class="widget app-card"><div class="app-preview-image"><img src="https://placehold.co/400x200/000000/fff?text=X" alt="X (Twitter)"></div><div class="app-info"><h3>X (Twitter)</h3><p>Comunicados y actualizaciones importantes al instante.</p></div><a href="https://twitter.com/udecuenca" target="_blank" class="app-open-button">Seguir en X</a></div></div></div>
                 </div>
+                
                 <div id="settings-content" class="page-content">
                     <h1 class="page-title">Ajustes</h1>
                     <div class="settings-section">
                         <div id="mobile-profile-card" class="widget profile-card">
                              <div class="profile-main">
-                                <div class="profile-picture">
-                                    <img class="user-profile-pic" src="https://placehold.co/120x120/ffffff/1e1e28?text=U" alt="User's profile picture">
-                                </div>
+                                <div class="profile-picture"><img class="user-profile-pic" src="https://placehold.co/120x120/ffffff/1e1e28?text=U" alt="User's profile picture"></div>
                                 <h2 class="user-display-name">Usuario</h2>
                             </div>
                             <ul class="profile-info-list">
@@ -383,11 +380,19 @@
                             <h3>Personalizar Fondo</h3>
                             <p style="color: var(--text-color-secondary); margin-bottom: 15px;">Elige una imagen de tu dispositivo para usarla como fondo.</p>
                             <label for="background-file-input" class="file-upload-btn">
-                                <i data-lucide="image"></i>
-                                Seleccionar Imagen
+                                <i data-lucide="image"></i> Seleccionar Imagen
                             </label>
                             <input type="file" id="background-file-input" accept="image/*">
                         </div>
+
+                        <div class="settings-card">
+                            <h3>Mi Horario</h3>
+                            <p style="color: var(--text-color-secondary); margin-bottom: 15px;">Abre el asistente para crear o modificar tu horario de clases.</p>
+                            <button id="edit-schedule-btn" class="file-upload-btn" style="background-color: #60a5fa;">
+                                <i data-lucide="edit"></i> Editar Horario
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -401,6 +406,9 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Color Thief Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+
     <!-- Lógica de la Aplicación -->
     <script type="module" src="script.js"></script>
 
@@ -409,12 +417,8 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker registrado con éxito:', registration);
-                    })
-                    .catch(error => {
-                        console.log('Error al registrar el Service Worker:', error);
-                    });
+                    .then(registration => console.log('Service Worker registrado con éxito:', registration))
+                    .catch(error => console.log('Error al registrar el Service Worker:', error));
             });
         }
     </script>
