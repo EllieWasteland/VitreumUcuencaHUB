@@ -1,0 +1,97 @@
+{
+  "1": {
+    "schedules": {
+      "1-matutino": {
+        "lunes": [{ "name": "Introducción a la Pedagogía", "teacher": "Dra. Carmen Solis", "start": "07:00", "end": "09:00" }],
+        "martes": [{ "name": "Desarrollo Humano", "teacher": "MSc. Juan Pérez", "start": "09:00", "end": "11:00" }],
+        "miercoles": [{ "name": "Introducción a la Pedagogía", "teacher": "Dra. Carmen Solis", "start": "07:00", "end": "09:00" }],
+        "jueves": [{ "name": "Desarrollo Humano", "teacher": "MSc. Juan Pérez", "start": "09:00", "end": "11:00" }],
+        "viernes": []
+      },
+      "1-vespertino": {
+        "lunes": [{ "name": "Introducción a la Pedagogía (V)", "teacher": "Dra. Carmen Solis", "start": "14:00", "end": "16:00" }],
+        "martes": [],
+        "miercoles": [{ "name": "Introducción a la Pedagogía (V)", "teacher": "Dra. Carmen Solis", "start": "14:00", "end": "16:00" }],
+        "jueves": [],
+        "viernes": []
+      }
+    },
+    "apps": [
+      {
+        "title": "CreaCuentos Digital",
+        "description": "Herramienta para crear historias interactivas para niños.",
+        "image": "https://placehold.co/400x200/8e44ad/fff?text=CreaCuentos",
+        "url": "#",
+        "buttonText": "Iniciar Herramienta"
+      }
+    ],
+    "services": {
+      "Servicios Generales": [
+          {
+              "title": "Nova (SGA)","description": "Consulta tus notas, materias y recursos académicos.","image": "https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif","url": "#", "buttonText": "Ir a Nova"
+          },
+          {
+              "id": "enova-login-btn", "title": "eNOVA (Moodle)","description": "Plataforma de e-learning para tus cursos.","image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s","url": "#", "buttonText": "Ir a eNOVA"
+          }
+      ],
+      "Recursos de Ciclo 1": [
+        {
+          "title": "Material Didáctico Inicial",
+          "description": "Acceso a guías y recursos de bienvenida para primer ciclo.",
+          "image": "https://placehold.co/400x200/27ae60/fff?text=Recursos",
+          "url": "#",
+          "buttonText": "Ver Material"
+        }
+      ]
+    }
+  },
+  "2": {
+    "schedules": {
+      "1-matutino": {
+        "lunes": [{ "name": "Didáctica General", "teacher": "MSc. Elena Robles", "start": "08:00", "end": "10:00" }],
+        "martes": [],
+        "miercoles": [
+          { "name": "Didáctica General", "teacher": "MSc. Elena Robles", "start": "08:00", "end": "10:00" },
+          { "name": "Psicología Educativa", "teacher": "PhD. Marco Vera", "start": "10:00", "end": "12:00" }
+        ],
+        "jueves": [],
+        "viernes": [{ "name": "Psicología Educativa", "teacher": "PhD. Marco Vera", "start": "10:00", "end": "12:00" }]
+      }
+    },
+    "apps": [
+      {
+        "title": "MathKids+",
+        "description": "Plataforma de juegos para la enseñanza de matemáticas.",
+        "image": "https://placehold.co/400x200/2980b9/fff?text=MathKids%2B",
+        "url": "#",
+        "buttonText": "Acceder"
+      },
+      {
+        "title": "PlanificaFácil",
+        "description": "Asistente para crear planificaciones de clase efectivas.",
+        "image": "https://placehold.co/400x200/34495e/fff?text=Planifica",
+        "url": "#",
+        "buttonText": "Crear Plan"
+      }
+    ],
+    "services": {
+      "Servicios Generales": [
+          {
+              "title": "Nova (SGA)","description": "Consulta tus notas, materias y recursos académicos.","image": "https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif","url": "#", "buttonText": "Ir a Nova"
+          },
+          {
+              "id": "enova-login-btn", "title": "eNOVA (Moodle)","description": "Plataforma de e-learning para tus cursos.","image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s","url": "#", "buttonText": "Ir a eNOVA"
+          }
+      ],
+      "Recursos de Ciclo 2": [
+        {
+          "title": "Modelos de Planificación",
+          "description": "Ejemplos de planificación de clases para segundo ciclo.",
+          "image": "https://placehold.co/400x200/f39c12/fff?text=Planes",
+          "url": "#",
+          "buttonText": "Ver Modelos"
+        }
+      ]
+    }
+  }
+}
