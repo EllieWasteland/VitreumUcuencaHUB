@@ -1,0 +1,58 @@
+{
+  "1": {
+    "schedules": {
+      "1-matutino": {
+        "lunes": [
+          { "name": "Teoría de la Comunicación", "teacher": "Dr. Luis Alarcón", "start": "08:00", "end": "10:00" }
+        ],
+        "martes": [
+          { "name": "Redacción Periodística I", "teacher": "Lic. Ana Vintimilla", "start": "10:00", "end": "12:00" }
+        ],
+        "miercoles": [
+          { "name": "Teoría de la Comunicación", "teacher": "Dr. Luis Alarcón", "start": "08:00", "end": "10:00" }
+        ],
+        "jueves": [
+          { "name": "Redacción Periodística I", "teacher": "Lic. Ana Vintimilla", "start": "10:00", "end": "12:00" }
+        ],
+        "viernes": [
+          { "name": "Fotografía Básica", "teacher": "MSc. Carlos Heredia", "start": "09:00", "end": "11:00" }
+        ]
+      }
+    },
+    "apps": [
+      {
+        "title": "Editor de Audio Audacity",
+        "description": "Software libre para grabación y edición de audio.",
+        "image": "https://placehold.co/400x200/c0392b/fff?text=Audacity",
+        "url": "https://www.audacityteam.org/",
+        "buttonText": "Descargar"
+      },
+      {
+        "title": "Canva para Infografías",
+        "description": "Herramienta online para crear recursos visuales y periodísticos.",
+        "image": "https://placehold.co/400x200/16a085/fff?text=Canva",
+        "url": "https://www.canva.com/",
+        "buttonText": "Usar Canva"
+      }
+    ],
+    "services": {
+      "Servicios Generales": [
+          {
+              "title": "Nova (SGA)","description": "Consulta tus notas, materias y recursos académicos.","image": "https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif","url": "#", "buttonText": "Ir a Nova"
+          },
+          {
+              "id": "enova-login-btn", "title": "eNOVA (Moodle)","description": "Plataforma de e-learning para tus cursos.","image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s","url": "#", "buttonText": "Ir a eNOVA"
+          }
+      ],
+      "Recursos de Periodismo": [
+        {
+          "title": "Manual de Estilo",
+          "description": "Acceso al manual de estilo de la carrera para redacción.",
+          "image": "https://placehold.co/400x200/2c3e50/fff?text=Manual",
+          "url": "#",
+          "buttonText": "Consultar"
+        }
+      ]
+    }
+  }
+}
