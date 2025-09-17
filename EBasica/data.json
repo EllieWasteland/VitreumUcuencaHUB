@@ -2,7 +2,7 @@
   "educacion-basica": {
     "general_content": {
       "summary_header": {
-        "title": "¡Hola de nuevo, {userName}!",
+        "title": "¡oap, {userName}!",
         "description": "Aquí tienes un vistazo rápido de tu día. Mantente organizado y al día con tus actividades.",
         "buttonText": "Explorar Servicios",
         "image": "https://assets.codepen.io/3364143/glass.png"
