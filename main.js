@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ahora apunta a los directorios de cada carrera
     const CAREER_DATA_PATHS = {
         'periodismo': 'https://raw.githubusercontent.com/EllieWasteland/VitreumUcuencaHUB/main/Perio', // Ruta a la carpeta
-        'educacion-basica': './EBasica', // Ruta a la carpeta local
+        'educacion-basica': 'https://raw.githubusercontent.com/EllieWasteland/VitreumUcuencaHUB/main/EBasica', // Ruta a la carpeta local
         'offline': './offline-data.json' // Offline sigue siendo un archivo único
     };
 
@@ -460,3 +460,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- INICIAR LA APLICACIÓN ---
     initializeApp();
 });
+
