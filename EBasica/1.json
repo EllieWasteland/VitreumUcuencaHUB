@@ -1,0 +1,113 @@
+{
+    "1": {
+      "matutino": {
+        "summary_content": {
+          "summary_slider": [
+            { 
+              "title": "¡Bienvenido a Ciclo Tester, {userName}!", 
+              "description": "Este es tu centro de mando para el inicio de tu carrera. ¡Mucho éxito!", 
+              "buttonText": "Explorar Servicios", 
+              "image": "https://www.ucuenca.edu.ec/wp-content/uploads/2025/09/Banner-WEB_Bienal.jpg",
+              "url": "#services-content"
+            },
+            { 
+              "title": "Descubre el Ecosistema Vitreum", 
+              "description": "Accede a aplicaciones y herramientas diseñadas para potenciar tu aprendizaje.", 
+              "buttonText": "Ver Apps", 
+              "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "url": "#apps-content"
+            },
+            { 
+              "title": "Organiza tu Semana", 
+              "description": "Utiliza el asistente para configurar tu horario y no perderte ninguna clase.", 
+              "buttonText": "Ir a mi Horario", 
+              "image": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "url": "#schedule-content"
+            }
+          ],
+          "summary_services": { "title": "Servicios Esenciales de Ciclo 1", "items": [
+            { "name": "Nova (SGA)", "icon": "book-open-check", "color": "rgba(0, 102, 255, 0.2)", "textColor": "#66b0ff", "online": true, "url": "https://nova.ucuenca.edu.ec/" },
+            { "name": "eNova (Moodle)", "icon": "graduation-cap", "color": "rgba(255, 153, 0, 0.2)", "textColor": "#ffc266", "online": true, "url": "#" }
+          ]},
+          "quick_access_cards": { "title": "Accesos Rápidos", "items": [
+            { "title": "Biblioteca", "icon": "library", "color": "rgba(45, 212, 191, 0.2)", "textColor": "#3ddcc7", "description": "Busca y accede a la base de datos de la biblioteca.", "buttonText": "Buscar Libros", "url": "#" },
+            { "title": "Calendario Académico", "icon": "calendar-days", "color": "rgba(234, 179, 8, 0.2)", "textColor": "#fce188", "description": "Fechas importantes, matrículas y exámenes.", "buttonText": "Ver Calendario", "url": "#" }
+          ]}
+        },
+        "schedules": {
+          "lunes": [{ "name": "Introducción a la Pedagogía", "teacher": "Dra. Carmen Solis", "start": "07:00", "end": "09:00" }],
+          "martes": [{ "name": "Desarrollo Humano", "teacher": "MSc. Juan Pérez", "start": "09:00", "end": "11:00" }],
+          "miercoles": [{ "name": "Introducción a la Pedagogía", "teacher": "Dra. Carmen Solis", "start": "07:00", "end": "09:00" }],
+          "jueves": [{ "name": "Desarrollo Humano", "teacher": "MSc. Juan Pérez", "start": "09:00", "end": "11:00" }],
+          "viernes": []
+        },
+        "apps": [
+          { "title": "CreaCuentos Digital", "description": "Herramienta para crear historias interactivas para niños.", "image": "https://placehold.co/400x200/8e44ad/fff?text=CreaCuentos", "url": "#", "buttonText": "Iniciar Herramienta" }
+        ],
+        "services": [
+          { "category": "Servicios Generales", "description": "Herramientas y plataformas esenciales de la universidad.", "subcategories": [
+              { "title": "Plataformas Principales", "cards": [
+                  { "title": "Nova (SGA)", "description": "Consulta tus notas, materias y recursos académicos.", "image": "https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif", "url": "https://nova.ucuenca.edu.ec/", "buttonText": "Ir a Nova" },
+                  { "id": "enova-login-btn", "title": "eNOVA (Moodle)", "description": "Plataforma de e-learning para tus cursos.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s", "url": "#", "buttonText": "Ir a eNOVA" }
+              ]}
+          ]}
+        ],
+        "contacts": [
+          {
+            "name": "Dra. Carmen Solis",
+            "position": "Coordinadora de Ciclo 1",
+            "email": "carmen.solis@ucuenca.edu.ec"
+          },
+          {
+            "name": "MSc. Juan Pérez",
+            "position": "Secretario Académico de Carrera",
+            "email": "juan.perez@ucuenca.edu.ec"
+          },
+          {
+            "name": "Soporte Técnico De Vitreum",
+            "position": "Asistencia con la Plataforma",
+            "email": "soporte.vitreum@ucuencaedu.ec."
+          }
+        ]
+      },
+      "vespertino": {
+        "summary_content": {
+          "summary_slider": [
+            { 
+              "title": "¡Bienvenido a Ciclo 1 (Vespertino), {userName}!", 
+              "description": "Este es tu centro de mando para el inicio de tu carrera. ¡Mucho éxito!", 
+              "buttonText": "Explorar Servicios", 
+              "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "url": "#services-content"
+            }
+          ],
+          "summary_services": { "title": "Servicios Esenciales de Ciclo 1", "items": [
+            { "name": "Nova (SGA)", "icon": "book-open-check", "color": "rgba(0, 102, 255, 0.2)", "textColor": "#66b0ff", "online": true, "url": "https://nova.ucuenca.edu.ec/" },
+            { "name": "eNova (Moodle)", "icon": "graduation-cap", "color": "rgba(255, 153, 0, 0.2)", "textColor": "#ffc266", "online": true, "url": "#" }
+          ]},
+          "quick_access_cards": { "title": "Accesos Rápidos", "items": [
+            { "title": "Biblioteca", "icon": "library", "color": "rgba(45, 212, 191, 0.2)", "textColor": "#3ddcc7", "description": "Busca y accede a la base de datos de la biblioteca.", "buttonText": "Buscar Libros", "url": "#" },
+            { "title": "Calendario Académico", "icon": "calendar-days", "color": "rgba(234, 179, 8, 0.2)", "textColor": "#fce188", "description": "Fechas importantes, matrículas y exámenes.", "buttonText": "Ver Calendario", "url": "#" }
+          ]}
+        },
+        "schedules": {
+          "lunes": [{ "name": "Introducción a la Pedagogía (V)", "teacher": "Dra. Carmen Solis", "start": "14:00", "end": "16:00" }],
+          "martes": [],
+          "miercoles": [{ "name": "Introducción a la Pedagogía (V)", "teacher": "Dra. Carmen Solis", "start": "14:00", "end": "16:00" }],
+          "jueves": [],
+          "viernes": []
+        },
+        "apps": [
+          { "title": "CreaCuentos Digital", "description": "Herramienta para crear historias interactivas para niños.", "image": "https://placehold.co/400x200/8e44ad/fff?text=CreaCuentos", "url": "#", "buttonText": "Iniciar Herramienta" }
+        ],
+        "services": [
+          { "category": "Servicios Generales", "description": "Herramientas y plataformas esenciales de la universidad.", "subcategories": [
+              { "title": "Plataformas Principales", "cards": [
+                  { "title": "Nova (SGA)", "description": "Consulta tus notas, materias y recursos académicos.", "image": "https://www.ucuenca.edu.ec/wp-content/uploads/2025/03/Banner_Experience_2.gif", "url": "https://nova.ucuenca.edu.ec/", "buttonText": "Ir a Nova" },
+                  { "id": "enova-login-btn", "title": "eNOVA (Moodle)", "description": "Plataforma de e-learning para tus cursos.", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Hu2uFyAz4ubdDuohtQ3MoKFBm5ZxOcM1iA&s", "url": "#", "buttonText": "Ir a eNOVA" }
+              ]}
+          ]}
+        ]
+      }
+    }
+}
